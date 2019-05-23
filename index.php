@@ -103,7 +103,7 @@ input#file {
 		<form enctype="multipart/form-data" action="" method="POST">
 			<input type="file" name="batchfile" class="input" id="file" style="border-bottom:1px solid #000;"/>
 			<input type="number" min="1" max="20" name="passage" class="input" placeholder="Nombre de passage (Par defaut : 1, Max : 20)" style="border-radius: 0px;border-top:1px solid #000;" />
-			<input type="submit" class="btn" value="Obfusquer !" onclick="this.value='Algorithme en cours..'"/>
+			<input type="submit" class="btn" value="Brouiller le fichier !" onclick="this.value='Algorithme en cours..'"/>
 		</form>
 	</center>
 

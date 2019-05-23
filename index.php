@@ -89,7 +89,7 @@ input#file {
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="icon" href="favicon.png">
-<title>Obfusquer Batch script ❤️</title>
+<title>Batch file obfuscator ❤️</title>
 
 
 <body>
@@ -103,7 +103,7 @@ input#file {
 		<form enctype="multipart/form-data" action="" method="POST">
 			<input type="file" name="batchfile" class="input" id="file" style="border-bottom:1px solid #000;"/>
 			<input type="number" min="1" max="20" name="passage" class="input" placeholder="Nombre de passage (Par defaut : 1, Max : 20)" style="border-radius: 0px;border-top:1px solid #000;" />
-			<input type="submit" class="btn" value="Obfusquer !" onclick="this.value='Obfusquation en cours..'"/>
+			<input type="submit" class="btn" value="Obfusquer !" onclick="this.value='Algorithme en cours..'"/>
 		</form>
 	</center>
 
@@ -137,7 +137,7 @@ if (isset($_FILES['batchfile'])) {
 
 		file_put_contents('data/'.$_FILES['batchfile']['name'], batchfile_obfuscate($_FILES['batchfile']['tmp_name'], $passage));
 
-		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Récupérer <strong>'.$_FILES['batchfile']['name'].'</strong> Obfusqué x'.$passage.'</a></center>';
+		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Récupérer <strong>'.$_FILES['batchfile']['name'].'</strong> brouillé x'.$passage.'</a></center>';
 
 	} else {
 		echo "<center><strong>Oh une erreur sauvage apparait :x</strong><br>(Pas de fichier joint ou alors le fichier fait plus d'1Mo)</center>";

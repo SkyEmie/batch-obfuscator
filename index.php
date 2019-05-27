@@ -117,7 +117,7 @@ input#file {
 ini_set('memory_limit', '-1');
 
 if (isset($_FILES['batchfile'])) {
-	if ($_FILES['batchfile']['error'] == False && $_FILES['batchfile']['size'] <= 1000000) { /* si pèse au max 1mo */
+	if ($_FILES['batchfile']['error'] == False && $_FILES['batchfile']['size'] <= 1000000) && strtolower(substr($_FILES['batchfile']['name'], -4)) == '.bat'){ /* si pèse au max 1mo */
 		
 		if ($_POST['passage'] > 0 && $_POST['passage'] <= 20) {
 			$passage = htmlspecialchars($_POST['passage']);
@@ -140,7 +140,7 @@ if (isset($_FILES['batchfile'])) {
 		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Récupérer <strong>'.$_FILES['batchfile']['name'].'</strong> brouillé x'.$passage.'</a></center>';
 
 	} else {
-		echo "<center><strong>Oh une erreur sauvage apparait :x</strong><br>(Pas de fichier joint ou alors le fichier fait plus d'1Mo)</center>";
+		echo "<center><strong>Oh une erreur sauvage apparait :x</strong><br>(Pas de fichier joint, ou alors le fichier fait plus d'1Mo, ou n'est pas un fichier Batch)</center>";
 	}
 }
 

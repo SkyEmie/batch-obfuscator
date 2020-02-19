@@ -11,7 +11,7 @@ Done!
 
 ## Examples
 
-https://edgardguerinot.com/batch-obfuscator/
+http://149.91.82.85/batch-obfuscator/
 
 ![1](https://raw.githubusercontent.com/SkywalkerFR/batch-obfuscator/master/1.png)
 ![2](https://raw.githubusercontent.com/SkywalkerFR/batch-obfuscator/master/2.png)

@@ -1,4 +1,3 @@
-
 <style type="text/css">
 
 * {
@@ -88,7 +87,7 @@ input#file {
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="icon" href="favicon.png">
+<link rel="icon" href="favicon.ico">
 <title>Batch file obfuscator ❤️</title>
 
 

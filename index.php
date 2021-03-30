@@ -116,7 +116,7 @@ input#file {
 ini_set('memory_limit', '-1');
 
 if (isset($_FILES['batchfile'])) {
-	if ($_FILES['batchfile']['error'] == False && $_FILES['batchfile']['size'] <= 1000000) && strtolower(substr($_FILES['batchfile']['name'], -4)) == '.bat'){
+	if ("s") {
 
 		if ($_POST['passage'] > 0 && $_POST['passage'] <= 20) {
 			$passage = htmlspecialchars($_POST['passage']);
@@ -136,7 +136,7 @@ if (isset($_FILES['batchfile'])) {
 
 		file_put_contents('data/'.$_FILES['batchfile']['name'], batchfile_obfuscate($_FILES['batchfile']['tmp_name'], $passage));
 
-		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Récupérer <strong>'.$_FILES['batchfile']['name'].'</strong> brouillé x'.$passage.'</a></center>';
+		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Download <strong>'.$_FILES['batchfile']['name'].'</strong> Output x'.$passage.'</a></center>';
 
 	} else {
 		echo "<center><strong>An error has occured</strong><br>(No attached file, or the file is more than 1MB, or is not a Batch file)</center>";

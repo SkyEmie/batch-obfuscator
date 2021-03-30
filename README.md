@@ -13,7 +13,5 @@ Done!
 
 https://iowndolphins.xyz/batch
 
-![1](https://raw.githubusercontent.com/SkyEmie/batch-obfuscator/master/1.png)
-![2](https://raw.githubusercontent.com/SkyEmie/batch-obfuscator/master/2.png)
-
-
+![1](https://raw.githubusercontent.com/Redcarred2/batch-obfuscator/master/1.png)
+![2](https://raw.githubusercontent.com/Redcarred2/batch-obfuscator/master/2.png)

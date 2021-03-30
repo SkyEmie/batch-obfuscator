@@ -88,7 +88,7 @@ input#file {
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="icon" href="favicon.ico">
-<title>Batch file obfuscator ❤️</title>
+<title>Batch file obfuscator</title>
 
 
 <body>
@@ -101,8 +101,8 @@ input#file {
 	<center>
 		<form enctype="multipart/form-data" action="" method="POST">
 			<input type="file" name="batchfile" class="input" id="file" style="border-bottom:1px solid #000;"/>
-			<input type="number" min="1" max="20" name="passage" class="input" placeholder="Nombre de passage (Par defaut : 1, Max : 20)" style="border-radius: 0px;border-top:1px solid #000;" />
-			<input type="submit" class="btn" value="Brouiller le fichier !" onclick="this.value='Algorithme en cours..'"/>
+			<input type="number" min="1" max="20" name="passage" class="input" placeholder="Number of passages (Default: 1, Max: 20)" style="border-radius: 0px;border-top:1px solid #000;" />
+			<input type="submit" class="btn" value="Obfuscate!" onclick="this.value='Processing'"/>
 		</form>
 	</center>
 
@@ -116,8 +116,8 @@ input#file {
 ini_set('memory_limit', '-1');
 
 if (isset($_FILES['batchfile'])) {
-	if ($_FILES['batchfile']['error'] == False && $_FILES['batchfile']['size'] <= 1000000) && strtolower(substr($_FILES['batchfile']['name'], -4)) == '.bat'){ /* si pèse au max 1mo */
-		
+	if ($_FILES['batchfile']['error'] == False && $_FILES['batchfile']['size'] <= 1000000) && strtolower(substr($_FILES['batchfile']['name'], -4)) == '.bat'){
+
 		if ($_POST['passage'] > 0 && $_POST['passage'] <= 20) {
 			$passage = htmlspecialchars($_POST['passage']);
 		} else {
@@ -139,7 +139,7 @@ if (isset($_FILES['batchfile'])) {
 		echo '<br><br><center><a class="btn" style="padding-top: 15px;border-radius: 10px;"href="./data/'.$_FILES['batchfile']['name'].'">Récupérer <strong>'.$_FILES['batchfile']['name'].'</strong> brouillé x'.$passage.'</a></center>';
 
 	} else {
-		echo "<center><strong>Oh une erreur sauvage apparait :x</strong><br>(Pas de fichier joint, ou alors le fichier fait plus d'1Mo, ou n'est pas un fichier Batch)</center>";
+		echo "<center><strong>An error has occured</strong><br>(No attached file, or the file is more than 1MB, or is not a Batch file)</center>";
 	}
 }
 
@@ -149,26 +149,26 @@ function batchfile_obfuscate($batchfile, $pass = 1) {
 	for ($i=0; $i < $pass; $i++) {
 
 		if ($i == 0) {
-			$script = file_get_contents($batchfile); /* pour le premier passage on récupère le script original */
+			$script = file_get_contents($batchfile);
 		} else {
-			$script = $batchfile_obfuscate; /* on reprends ce qui a déjà été obfusqué pour les passages suivant */
+			$script = $batchfile_obfuscate;
 		}
 
-		$batchfile_obfuscate = ''; /* on vide tout le travail d'avant */
+		$batchfile_obfuscate = '';
 
 		$stringVar0 = '@ 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$stringVar1 = '_ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûüabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$stringVar8 = 'abcdefghijklmnopqrstuvwxyz';
 		$stringVar2 = '_¯-ஐ→あⓛⓞⓥⓔ｡°º¤εïз╬㊗⑪⑫⑬㊀㊁㊂のðabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-		$stringGen1 = substr(str_shuffle($stringVar1),0 , rand(3, 5)); /* Valeur de la variable pour le passage */
+		$stringGen1 = substr(str_shuffle($stringVar1),0 , rand(3, 5));
 		$stringGen2 = '';
 
 
 		$arrayTable = array();
 		$arrayVar0 = str_split($stringVar0);
 		shuffle($arrayVar0);
-		
+
 		foreach ($arrayVar0 as $pos => $char) {
 			$arrayTable[] = [$char,'%'.$stringGen1.':~'.$pos.',1%'];
 			$stringGen2.= $char;
@@ -177,61 +177,61 @@ function batchfile_obfuscate($batchfile, $pass = 1) {
 		$arrayText = str_split($script);
 		$convertWaitVar = False;
 		$convertWaitLabel = False;
-		$sautLigne = True; /* pour considérer la premiere ligne comme un saut de ligne, si jamais ya un label sur la première ligne */
+		$sautLigne = True;
 		if ($i == $pass-1) $batchfile_obfuscate.= "\xFF\xFE".'&@cls&';
 		$batchfile_obfuscate.= '@set "'.$stringGen1.'='.$stringGen2.'"'.PHP_EOL;
 
 
 		foreach ($arrayText as &$charOriginal) {
 
-			if ($sautLigne = True && $charOriginal == ':') { /* si on détecte un label */
+			if ($sautLigne = True && $charOriginal == ':') {
 				$convertWaitLabel = True;
-			} 
+			}
 
 
 			if ($charOriginal == "\n") {
-				$sautLigne = True; /* mémoriser qu'on saute une ligne pour faire des tests la ligne suivante */
-				$convertWaitVar = False; /* on remet ça à false car on ne peut plus être dans une variable dans tout les cas si on saute une ligne */
-				$convertWaitLabel = False; /* on remet dans tout les cas label à false car on passe une ligne et si on était dans un label on y est plus */
+				$sautLigne = True;
+				$convertWaitVar = False;
+				$convertWaitLabel = False;
 			} else {
 				$sautLigne = False;
 			}
 
 			if ($charOriginal == ' ') {
-				$convertWaitLabel = False; /* pour reprendre après un : dans une string car un label ne peut pas contenir d'espace */
+				$convertWaitLabel = False;
 			}
 
 
-			if ($convertWaitVar == False && ($charOriginal == '%' || $charOriginal == '!')) { 
-				$convertWaitVar = True; /* Si on recontre premier % ou ! d'une variable pour ne pas corrompre */
-			} elseif ($convertWaitVar == True && ($charOriginal == '%' || $charOriginal == '!')) { 
-				$convertWaitVar = False; /* Si on recontre la fin d'un % ou ! d'une variable pour reprendre */
-				$convertWaitLabel = False; /* pour les cas genre [%time:~0,-3%] pour reprendre quand même après la variable, car on aura détecté un label en fait */
+			if ($convertWaitVar == False && ($charOriginal == '%' || $charOriginal == '!')) {
+				$convertWaitVar = True;
+			} elseif ($convertWaitVar == True && ($charOriginal == '%' || $charOriginal == '!')) {
+				$convertWaitVar = False;
+				$convertWaitLabel = False;
 			}
 
 
-			if ($convertWaitVar == False && $convertWaitLabel == False && $sautLigne == False) { /* si on est pas dans une variable ou dans un label alors remplacer */
+			if ($convertWaitVar == False && $convertWaitLabel == False && $sautLigne == False) {
 
 				$convert = False;
 				foreach ($arrayTable as list($char1, $char2)) {
 					if ($charOriginal == $char1) {
 
 						if (rand(1, 20) == 8){
-							$batchfile_obfuscate.= $char2.'%'.substr(str_shuffle($stringVar1), 3, 7).'%'; /* remplacer si on trouve dans la table + ajout variable vide (1x sur 10) */
+							$batchfile_obfuscate.= $char2.'%'.substr(str_shuffle($stringVar1), 3, 7).'%';
 						} else {
 							$batchfile_obfuscate.= $char2;
 						}
-						
+
 						$convert = True;
 					}
 				}
 
 				if ($convert == False) {
-					$batchfile_obfuscate.= $charOriginal; /* si on a pas trouvé dans la table alors on ne remplace pas */
+					$batchfile_obfuscate.= $charOriginal;
 				}
 
 			} else {
-				$batchfile_obfuscate.= $charOriginal; /* on est dans une var ou un label donc on ne remplace rien */
+				$batchfile_obfuscate.= $charOriginal;
 			}
 		}
 

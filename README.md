@@ -11,7 +11,7 @@ Done!
 
 ## Examples
 
-http://45.147.97.170/batch-obfuscator/
+http://77.237.242.134/batch-obfuscator/
 
 ![1](https://raw.githubusercontent.com/SkyEmie/batch-obfuscator/master/1.png)
 ![2](https://raw.githubusercontent.com/SkyEmie/batch-obfuscator/master/2.png)
